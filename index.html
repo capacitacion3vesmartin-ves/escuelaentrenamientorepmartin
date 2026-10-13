@@ -21,6 +21,7 @@ svg.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke
 .top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 22px;background:#fff;border-bottom:1px solid var(--ln);position:sticky;top:var(--sh);z-index:5;box-shadow:0 2px 10px rgba(20,40,30,.06)}
 .top .sec{flex:1;font-size:18px;font-weight:800;color:#1c2b45;min-width:120px}.ctl{display:flex;gap:10px;flex-wrap:wrap}
 .ctl label{font-size:11px;font-weight:700;color:var(--mu);display:flex;flex-direction:column;gap:2px}
+html{overflow-x:hidden}body{overflow-x:clip}.tw,.seg,.ddp,aside{overscroll-behavior-x:contain}
 main{padding:18px 22px 60px;max-width:1240px}
 .card{background:#fff;border:1px solid var(--ln);border-radius:12px;padding:14px 16px;margin-bottom:14px;box-shadow:0 1px 4px rgba(20,40,30,.06)}
 .bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
@@ -57,11 +58,13 @@ table{width:100%;border-collapse:collapse}th{font-size:12px;font-weight:700;colo
 .rh{display:flex;align-items:center;gap:14px;background:linear-gradient(100deg,var(--hc,#1c2b45),#1c2b45);color:#fff;padding:16px 20px;flex-wrap:wrap}.rh img{height:46px;background:#fff;border-radius:8px;padding:3px}
 .rh .rt{font-size:12px;opacity:.85;font-weight:600}.rh .rs{font-size:22px;font-weight:800}.rh .rd{margin-left:auto;text-align:right;font-size:13px;line-height:1.45}
 .kp{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;padding:16px 20px 6px}.kp div{border:1px solid var(--ln);border-top:4px solid var(--c);border-radius:10px;padding:10px 12px}.kp b{display:block;font-size:26px;color:var(--c)}.kp small{color:var(--mu);font-weight:600;font-size:12px}
+.rtm{margin:0;padding:14px 20px;background:linear-gradient(100deg,#eef8f1,#fff);border-left:6px solid var(--hc,#009640);border-bottom:1px solid var(--ln)}.rtl{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--gd);margin-bottom:6px}.rtc{display:flex;flex-wrap:wrap;align-items:center;gap:8px}.rtn{font-size:20px;font-weight:800;color:#1c2b45;line-height:1.25}.rtn+.rtn:before{content:'·';margin-right:8px;color:var(--mu);font-weight:700}.rtp{width:24px;height:24px;border:1px dashed var(--mu);border-radius:50%;background:none;color:var(--mu);font-size:15px;line-height:1;cursor:pointer;display:grid;place-items:center;padding:0;opacity:.7}.rtp:hover{opacity:1;color:var(--gd);border-color:var(--gd)}
 .rb{padding:0 20px 18px}.rb h4{font-size:13px;margin:14px 0 6px;color:var(--gd)}.prog{height:12px;background:#e6ece7;border-radius:8px;overflow:hidden}.prog i{display:block;height:100%;background:linear-gradient(90deg,var(--g),#5ccf8a);border-radius:8px}
 .cal{display:grid;grid-template-columns:repeat(6,minmax(100px,1fr));gap:8px;min-width:650px}
 .cal .hd{text-align:center;font-weight:800;font-size:15px;color:#fff;background:var(--sc);border-radius:8px;padding:9px 4px}
 .cl{border:1px solid var(--ln);border-radius:10px;overflow:hidden;background:#fff;min-height:88px;display:flex;flex-direction:column;font-size:11px}.cl.e{background:#f7f9f7}.cl.hoy{outline:2px solid var(--o)}
 .cl .dn{background:#0b3d3a;color:#fff;text-align:center;font-weight:800;padding:3px;font-size:12px}
+.cl[data-cday]:hover{box-shadow:0 0 0 2px var(--g)}
 .cl .tm{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;font-weight:800;text-transform:uppercase;padding:6px 4px;line-height:1.2}.cl .tm a{color:#fff;text-decoration:none}
 .ov{position:fixed;inset:0;background:rgba(20,30,25,.5);display:flex;align-items:center;justify-content:center;z-index:30;padding:16px}
 .dlg{background:#fff;border-radius:14px;padding:22px;max-width:440px;width:100%;line-height:1.5;max-height:92vh;overflow:auto}.dlg b{color:var(--gd)}
@@ -88,7 +91,7 @@ table{width:100%;border-collapse:collapse}th{font-size:12px;font-weight:700;colo
 .gh{border-top:4px solid var(--sc)}
 .sub{margin:14px 0 10px;padding-top:14px;border-top:1px dashed var(--ln)}
 @media(max-width:900px){.split{grid-template-columns:1fr}.side{border-left:0;border-top:2px solid var(--ln);padding:16px 0 0;margin:8px 0 0}}
-@media(max-width:800px){#app{display:block;padding-bottom:72px}aside{position:fixed;left:0;right:0;bottom:0;top:auto;width:auto;height:auto;flex-direction:row;overflow-x:auto;overflow-y:hidden;padding:6px;z-index:9;gap:2px}.brand{display:none}aside .bt{margin-top:0}aside button{flex-direction:column;gap:2px;font-size:10px;padding:6px 10px;min-width:64px;align-items:center}main{padding:14px}.top{padding:10px 14px}.rh{flex-wrap:wrap}.lgg{grid-template-columns:1fr}#strip{font-size:13px}}
+@media(max-width:800px){#app{display:block;padding-bottom:calc(72px + env(safe-area-inset-bottom,0px));max-width:100vw;overflow-x:clip}aside{position:fixed;left:0;right:0;bottom:0;top:auto;width:auto;height:auto;flex-direction:row;overflow-x:auto;overflow-y:hidden;padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px));z-index:40;gap:2px;transform:translateZ(0);-webkit-overflow-scrolling:touch}.brand{display:none}aside .bt{margin-top:0}aside button{flex-direction:column;gap:2px;font-size:10px;padding:6px 10px;min-width:64px;align-items:center}main{padding:14px}.top{padding:10px 14px}.rh{flex-wrap:wrap}.lgg{grid-template-columns:1fr}#strip{font-size:13px}}
 .pc{display:flex;align-items:flex-start;gap:10px;border:1px solid var(--ln);border-radius:10px;padding:8px 10px;margin-bottom:8px;background:#fff}
 .pc[draggable=true]{cursor:grab}.pc[draggable=true]:active{cursor:grabbing}.pc b{font-size:14px}.pc .pi{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px;align-items:flex-start}
 .pl{max-height:calc(100vh - 330px);overflow-y:auto;padding-right:4px}
@@ -171,7 +174,7 @@ const today=new Date();
 let AU=null;try{AU=sessionStorage.getItem('esc_au');if(AU!=='MASTER'&&!SEDES.includes(AU))AU=null}catch(e){}
 let CK='';try{CK=sessionStorage.getItem('esc_ck')||''}catch(e){}
 if(URL_API&&AU&&!CK)AU=null;
-let S={tab:'asis',mes:iso(today).slice(0,7),fecha:iso(today),tema:'',busq:'',sede:'all',area:'',pg:'',ag:'',add:false,rv:'g',rg:'',ra:'',nf:[],bp:'',bpe:'',ga:'',gn:'',bn:'',bpu:'',bt:'',tv:'ver',tflt:'all',rto:false};
+let S={tab:'asis',mes:iso(today).slice(0,7),fecha:iso(today),tema:'',busq:'',sede:'all',area:'',pg:'',ag:'',add:false,rv:'g',rg:'',ra:'',bra:'',cvw:'cal',cdm:'mes',cdmes:'',cdd1:iso(today),cdd2:iso(today),cdg:'',cda:'',cdq:'',cdp:false,nf:[],bp:'',bpe:'',ga:'',gn:'',bn:'',bpu:'',bt:'',tv:'ver',tflt:'all',rto:false};
 const IC={pers:'M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z',asis:'M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11',temas:'M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5A2.5 2.5 0 006.5 22H20V2H6.5A2.5 2.5 0 004 4.5z',cron:'M3 4h18v18H3zM16 2v4M8 2v4M3 10h18',notas:'M12 2l3 7 7 .6-5.3 4.7 1.6 7.2L12 17.8 5.7 21.5l1.6-7.2L2 9.6 9 9z',pun:'M12 2a10 10 0 100 20 10 10 0 000-20zM12 8v8M8 12h8',alum:'M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.9M16 3.1a4 4 0 010 7.8',rep:'M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8zM14 2v6h6M8 13h8M8 17h8',repa:'M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM17 11l2 2 4-4',datos:'M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3'};
 const TABS={asis:'Asistencia',temas:'Temas',cron:'Cronograma',notas:'Notas',pun:'Puntos',pers:'Personal',alum:'Grupos',rep:'Reporte general',repa:'Reporte por asesor',datos:'Datos'};
 const DN=['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],DAB=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],MS=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
@@ -194,7 +197,8 @@ const fmt=s=>new Date(s).toLocaleString('es-PE',{dateStyle:'medium',timeStyle:'s
 const TF=t=>t.fechas&&t.fechas.length?t.fechas:(t.fecha?[t.fecha]:[]);
 const setF=(t,a)=>{t.fechas=[...new Set((a||[]).filter(Boolean))].sort();t.fecha=t.fechas[0]||''};
 const GF=(g,t)=>((g.tf||{})[t.id]||[]);
-const setGF=(g,t,a)=>{g.tf=g.tf||{};a&&a.length?g.tf[t.id]=[...new Set(a)].sort():delete g.tf[t.id]};
+const setGF=(g,t,a)=>{g.tf=g.tf||{};g.th=g.th||{};if(a&&a.length){g.tf[t.id]=[...new Set(a)].sort();const h={};g.tf[t.id].forEach(f=>{const v=(a.h||{})[f];if(v)h[f]=v});Object.keys(h).length?g.th[t.id]=h:delete g.th[t.id]}else{delete g.tf[t.id];delete g.th[t.id]}};
+const GH=(g,t,f)=>((g.th||{})[t.id]||{})[f]||'',fh=(g,t,f)=>dsh(f)+(GH(g,t,f)?' · '+GH(g,t,f):''),HT=(t,f)=>[...new Set(D.grupos.filter(g=>g.te.includes(t.id)&&GF(g,t).includes(f)).map(g=>GH(g,t,f)).filter(Boolean))].sort();
 function syncF(){D.temas.forEach(t=>{const x=new Set();D.grupos.forEach(g=>GF(g,t).forEach(f=>x.add(f)));t.fechas=[...x].sort();t.fecha=t.fechas[0]||''})}
 const fotoUrl=u=>{u=String(u||'').trim();if(!u)return '';const m=u.match(/drive\.google\.com\/file\/d\/([^\/?#]+)/)||u.match(/drive\.google\.com\/(?:open|uc)\?(?:[^#]*&)?id=([^&#]+)/);return m?'https://drive.google.com/thumbnail?id='+m[1]+'&sz=w400':u};
 const iniciales=n=>String(n||'?').trim().split(/\s+/).slice(0,2).map(w=>w[0]||'').join('').toUpperCase();
@@ -223,7 +227,7 @@ norm();migra();
 
 /* ---------- diálogos ---------- */
 const temaDlg=t=>{const G=gs(S.mes).filter(g=>g.sede===t.sede);return ovl(`<h3 style="font-size:17px">Editar tema</h3><div class="f" style="grid-template-columns:1fr"><label>Nombre del tema<input id="et" value="${esc(t.titulo)}"></label><label>Link de la diapositiva (Canva)<input id="el" value="${esc(t.link||'')}"></label><label>Descripción<input id="ed" value="${esc(t.desc||'')}"></label></div><p style="margin:14px 0 6px;font-weight:700;font-size:12px;color:var(--mu)">Grupos asignados en ${MS[+S.mes.slice(5)-1]} ${S.mes.slice(0,4)}</p>${G.length?G.map(g=>`<label style="display:block;margin-bottom:4px"><input type="checkbox" class="gx" value="${g.id}"${g.te.includes(t.id)?' checked':''}> ${esc(g.nombre)} · ${dias(g.dias)}</label>`).join(''):'<p class="mu">No hay grupos este mes.</p>'}<p class="mu" style="margin-top:8px">La fecha se pone por grupo con el botón "Fecha" de la lista del grupo.</p>`+acts('Guardar cambios'),(q,f,o)=>{q('#cn').onclick=()=>f(null);q('#ok').onclick=()=>{const ti=q('#et').value.trim();if(!ti)return alert('El tema necesita un nombre.');f({titulo:ti,link:q('#el').value,desc:q('#ed').value.trim(),gids:[...o.querySelectorAll('.gx')].filter(c=>c.checked).map(c=>c.value),all:G.map(g=>g.id)})};q('#et').focus()})};
-const fechaDlg=(g,t)=>{let fs=[...GF(g,t)];return ovl(`<h3 style="font-size:17px">Fecha del tema</h3><p style="margin-bottom:10px"><b>${esc(t.titulo)}</b><br><span class="mu">${esc(g.nombre)} · ${dias(g.dias)}</span></p><div id="efc" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px"></div><div class="bar" style="margin:0"><input id="ef" type="date" value="${S.fecha}"><button class="btn" id="efa" type="button">+ Agregar fecha</button></div><p class="mu" style="margin-top:8px">Puedes poner varias fechas si el tema se dicta en más de un día.</p><div class="bar" style="margin:16px 0 0;justify-content:flex-end"><button class="btn" id="cn">Cancelar</button><button class="btn" id="sf">Sin fecha</button><button class="btn pr" id="ok">Guardar</button></div>`,(q,f,o)=>{const pf=()=>{q('#efc').innerHTML=fs.length?fs.map(d=>`<span class="ar" style="margin:0;font-size:13px">${dsh(d)} <button type="button" class="rmf" data-d="${d}" title="Quitar" style="border:0;background:none;cursor:pointer;font-weight:800;color:inherit">×</button></span>`).join(''):'<span class="mu">Sin fecha</span>';o.querySelectorAll('.rmf').forEach(b=>b.onclick=()=>{fs=fs.filter(x=>x!==b.dataset.d);pf()})};const add=()=>{const v=q('#ef').value;if(v&&!fs.includes(v)){fs.push(v);fs.sort()}pf()};q('#efa').onclick=add;pf();q('#cn').onclick=()=>f(null);q('#sf').onclick=()=>f([]);q('#ok').onclick=()=>{add();f([...fs])};q('#ef').focus()})};
+const fechaDlg=(g,t)=>{let fs=[...GF(g,t)],hs={...((g.th||{})[t.id]||{})};return ovl(`<h3 style="font-size:17px">Fecha y hora del tema</h3><p style="margin-bottom:10px"><b>${esc(t.titulo)}</b><br><span class="mu">${esc(g.nombre)} · ${dias(g.dias)}</span></p><div id="efc" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px"></div><div class="bar" style="margin:0"><input id="ef" type="date" value="${S.fecha}"><input id="eh" type="time" aria-label="Hora" title="Hora (opcional)"><button class="btn" id="efa" type="button">+ Agregar fecha</button></div><p class="mu" style="margin-top:8px">La hora es opcional. Puedes poner varias fechas si el tema se dicta en más de un día. Toca una fecha de la lista para cambiar su hora.</p><div class="bar" style="margin:16px 0 0;justify-content:flex-end"><button class="btn" id="cn">Cancelar</button><button class="btn" id="sf">Sin fecha</button><button class="btn pr" id="ok">Guardar</button></div>`,(q,f,o)=>{const pf=()=>{q('#efc').innerHTML=fs.length?fs.map(d=>`<span class="ar fch" data-d="${d}" title="Toca para editar la hora" style="margin:0;font-size:13px;cursor:pointer">${dsh(d)}${hs[d]?' · '+hs[d]:''} <button type="button" class="rmf" data-d="${d}" title="Quitar" style="border:0;background:none;cursor:pointer;font-weight:800;color:inherit">×</button></span>`).join(''):'<span class="mu">Sin fecha</span>';o.querySelectorAll('.rmf').forEach(b=>b.onclick=()=>{fs=fs.filter(x=>x!==b.dataset.d);delete hs[b.dataset.d];pf()});o.querySelectorAll('.fch').forEach(c=>c.onclick=e=>{if(e.target.closest('.rmf'))return;q('#ef').value=c.dataset.d;q('#eh').value=hs[c.dataset.d]||'';q('#eh').focus()})};const add=soft=>{const v=q('#ef').value,h=q('#eh').value;if(v){if(!fs.includes(v)){fs.push(v);fs.sort();h?hs[v]=h:delete hs[v]}else if(!soft){h?hs[v]=h:delete hs[v]}}pf()};q('#efa').onclick=()=>add(false);pf();q('#cn').onclick=()=>f(null);q('#sf').onclick=()=>f([]);q('#ok').onclick=()=>{add(true);const r=[...fs];r.h={...hs};f(r)};q('#ef').focus()})};
 const extraDlg=g=>{
   const fd=S.fecha,ex=new Set(XT(fd,g)),mi=new Set(g.al),rp={};
   Object.keys(D.asist).sort().forEach(f=>Object.entries(D.asist[f]).forEach(([i,v])=>{if(v==='R')rp[i]=f}));
@@ -257,8 +261,41 @@ function R(){
   $('#mes').value=S.mes;$('#ttl').textContent=TABS[S.tab]+' · '+(RO()?'Master':S.sede);
   $('#nav').innerHTML=Object.entries(TABS).filter(([k])=>k!=='datos').map(([k,v])=>`<button class="${S.tab===k?'on':''}" data-t="${k}"><svg class="i" viewBox="0 0 24 24"><path d="${IC[k]}"/></svg>${v}</button>`).join('');
   $('#m').innerHTML=(RO()?'<div class="rol">Estás en Master: solo lectura. Elige una sede para editar.</div>':'')+V[S.tab]();
-  if(RO())$('#m').querySelectorAll('button,input,textarea,select').forEach(e=>{if(!['fecha','tema','busq','cini','cfin','asesor','rgsel','busqp','busqpe','busqn','busqt','busqpu','gasel'].includes(e.id)&&!e.dataset.keep)e.disabled=true});
+  if(RO())$('#m').querySelectorAll('button,input,textarea,select').forEach(e=>{if(!['fecha','tema','busq','cini','cfin','asesor','rgsel','busqp','busqpe','busqn','busqt','busqpu','busqra','gasel','cdm','cdmes','cdd1','cdd2','cdg','cda','cdp','cdq'].includes(e.id)&&!e.dataset.keep)e.disabled=true});
 }
+/* ---------- cronograma: detalle por día y vista con filtros ---------- */
+const NQ=x=>String(x||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+const ordA=ids=>[...ids].sort((p,q)=>(D.areas.indexOf(alu(p).area)+1||99)-(D.areas.indexOf(alu(q).area)+1||99)||alu(p).nombre.localeCompare(alu(q).nombre));
+const areaCnt=ids=>{const m=new Map();ids.forEach(i=>{const a=alu(i).area||'';m.set(a,(m.get(a)||0)+1)});return [...m.entries()].sort((x,y)=>(D.areas.indexOf(x[0])+1||99)-(D.areas.indexOf(y[0])+1||99)).map(([a,n])=>[a||'Sin área',n])};
+const cronRows=(d1,d2)=>{const out=[];D.grupos.forEach(g=>{if(!inS(g.sede))return;g.te.forEach(id=>{const t=tem(id);if(!t)return;GF(g,t).forEach(f=>{if(f>=d1&&f<=d2)out.push({f,h:GH(g,t,f),t,g})})})});return out.sort((a,b)=>a.f.localeCompare(b.f)||(a.h||'99').localeCompare(b.h||'99')||a.t.titulo.localeCompare(b.t.titulo)||a.g.nombre.localeCompare(b.g.nombre))};
+const peopleList=ids=>ids.map(i=>`<div class="abi"><span>${esc(alu(i).nombre)}</span>${arT(alu(i).area)}</div>`).join('');
+const areaChips=ids=>areaCnt(ids).map(([a,n])=>`<span style="display:inline-block;margin:0 8px 4px 0;white-space:nowrap">${arT(a)} <b style="color:inherit">${n}</b></span>`).join('')||'<span class="mu">—</span>';
+const diaDlg=f=>{const rows=cronRows(f,f),d=fromIso(f);return ovl(`<h3 style="font-size:17px">${DN[d.getDay()]} ${d.getDate()} de ${MS[d.getMonth()]} de ${d.getFullYear()}</h3>`+rows.map(r=>{const ids=ordA(mem(r.g));return `<div class="card" style="margin:12px 0 0;padding:12px"><div style="font-weight:800;font-size:16px;color:#1c2b45">${esc(r.t.titulo)}</div><div style="margin:4px 0">${r.h?'Hora: <b>'+esc(r.h)+'</b>':'<span class="mu">Sin hora definida</span>'}</div><div class="mu">${esc(r.g.nombre)} · ${dias(r.g.dias)}${RO()?' · '+esc(r.g.sede):''}</div><div style="margin-top:8px">${ids.length?`<b>${ids.length} persona${ids.length===1?'':'s'}</b><div style="margin-top:4px">${areaChips(ids)}</div>`:'<span class="mu">Este grupo aún no tiene personas.</span>'}</div>${ids.length?`<details style="margin-top:6px"><summary style="cursor:pointer;font-weight:700;color:var(--gd)">Ver a quiénes les toca</summary><div style="margin-top:4px">${peopleList(ids)}</div></details>`:''}${r.t.link?`<a class="btn pr" href="${esc(r.t.link)}" target="_blank" rel="noopener" style="text-decoration:none;display:inline-block;margin-top:10px">Ver diapositiva</a>`:'<div class="mu" style="margin-top:8px">Este tema no tiene diapositiva cargada.</div>'}</div>`}).join('')+`<div class="bar" style="margin:16px 0 0;justify-content:flex-end"><button class="btn" id="cn">Cerrar</button></div>`,(q,c,o)=>{o.querySelector('.dlg').style.maxWidth='620px';q('#cn').onclick=()=>c(null);o.addEventListener('click',e=>{if(e.target===o)c(null)})})};
+const cronData=()=>{
+  const m=S.cdm,mes=S.cdmes||S.mes,fd=f=>{const x=fromIso(f);return x.getDate()+' de '+MS[x.getMonth()]+' de '+x.getFullYear()};let d1,d2,lab;
+  if(m==='mes'){const y=+mes.slice(0,4),mo=+mes.slice(5);d1=mes+'-01';d2=iso(new Date(y,mo,0));lab=MS[mo-1].charAt(0).toUpperCase()+MS[mo-1].slice(1)+' '+y}
+  else if(m==='sem'){const b=fromIso(S.cdd1);b.setDate(b.getDate()-((b.getDay()+6)%7));const e=new Date(b);e.setDate(e.getDate()+6);d1=iso(b);d2=iso(e);lab='Semana del '+fd(d1)+' al '+fd(d2)}
+  else if(m==='dia'){d1=d2=S.cdd1;const x=fromIso(d1);lab=DN[x.getDay()]+' '+fd(d1)}
+  else{d1=S.cdd1;d2=S.cdd2<d1?d1:S.cdd2;lab='Del '+fd(d1)+' al '+fd(d2)}
+  const all=cronRows(d1,d2),gl=[...new Map(all.map(r=>[r.g.id,r.g])).values()].sort((a,b)=>a.nombre.localeCompare(b.nombre));
+  if(S.cdg&&!gl.some(g=>g.id===S.cdg))S.cdg='';
+  let rows=all.map(r=>({...r,ids:ordA(mem(r.g))}));
+  if(S.cdg)rows=rows.filter(r=>r.g.id===S.cdg);
+  if(S.cda)rows=rows.map(r=>({...r,ids:r.ids.filter(i=>alu(i).area===S.cda)})).filter(r=>r.ids.length);
+  const q=NQ(S.cdq.trim());if(q)rows=rows.filter(r=>NQ(r.t.titulo).includes(q)||NQ(r.g.nombre).includes(q)||r.ids.some(i=>NQ(alu(i).nombre).includes(q)));
+  return {rows,lab,d1,d2,gl,m,mes};
+};
+const cronRep=(rows,lab,shot)=>{
+  const ds=[...new Set(rows.map(r=>r.f))],pers=new Set(rows.flatMap(r=>r.ids));
+  let h=`<div class="rp"><div class="rh" style="--hc:${scol()}"><img src="${$('.brand img').src}" alt=""><div><div class="rt">Cronograma de capacitación</div><div class="rs">${RO()?'Master':esc(S.sede)}</div></div><div class="rd">${esc(lab)}${S.cdg&&grp(S.cdg)?'<br>'+esc(grp(S.cdg).nombre):''}${S.cda?'<br>Área: '+esc(S.cda):''}</div></div>`;
+  h+=`<div class="kp">${tile('Sesiones',rows.length,'#1c2b45')}${tile('Días con capacitación',ds.length,'#009640')}${tile('Temas distintos',new Set(rows.map(r=>r.t.id)).size,'#2f7fd1')}${tile('Personas',pers.size,'#f07d00')}</div><div class="rb">`;
+  if(!rows.length)return h+'<div class="msg" style="margin-top:14px">No hay capacitaciones programadas con estos filtros.</div></div></div>';
+  ds.forEach(f=>{const x=fromIso(f),rs=rows.filter(r=>r.f===f);
+    h+=`<h4>${DN[x.getDay()]} ${x.getDate()} de ${MS[x.getMonth()]}</h4>`+tbl(['Hora','Tema','Grupo','Áreas','Personas'],rs.map(r=>`<tr><td style="white-space:nowrap"><b>${r.h?esc(r.h):'—'}</b></td><td><b>${esc(r.t.titulo)}</b>${!shot&&r.t.link?`<a class="sl" href="${esc(r.t.link)}" target="_blank" rel="noopener" style="display:block">Ver diapositiva</a>`:''}</td><td>${esc(r.g.nombre)}${RO()?bd(r.g.sede):''}<small class="mu" style="display:block">${dias(r.g.dias)}</small></td><td>${areaChips(r.ids)}</td><td>${S.cdp?`<b>${r.ids.length}</b>${peopleList(r.ids)}`:shot?`<b>${r.ids.length}</b>`:`<details><summary style="cursor:pointer;font-weight:700">${r.ids.length} persona${r.ids.length===1?'':'s'}</summary>${peopleList(r.ids)}</details>`}</td></tr>`).join(''))});
+  return h+'</div></div>';
+};
+const cronTxt=c=>{let t=`CRONOGRAMA DE CAPACITACIÓN\n${RO()?'Master':S.sede} · ${c.lab}\n`;if(S.cdg&&grp(S.cdg))t+=`Grupo: ${grp(S.cdg).nombre}\n`;if(S.cda)t+=`Área: ${S.cda}\n`;let last='';c.rows.forEach(r=>{if(r.f!==last){last=r.f;const x=fromIso(r.f);t+=`\n${DN[x.getDay()].toUpperCase()} ${x.getDate()}/${p2(x.getMonth()+1)}\n`}const ac=areaCnt(r.ids).map(([a,n])=>a+' '+n).join(', ');t+=`${r.h||'Sin hora'} · ${r.t.titulo} · ${r.g.nombre} · Áreas: ${ac||'—'} · ${r.ids.length} persona${r.ids.length===1?'':'s'}\n`;if(S.cdp)t+='   '+r.ids.map(i=>alu(i).nombre+' ('+(alu(i).area||'Sin área')+')').join(', ')+'\n'});if(!c.rows.length)t+='\nSin capacitaciones programadas con estos filtros.\n';return t};
+
 const V={
 asis(){
   const d=fromIso(S.fecha),gl0=gd(S.fecha),gm=gs(S.mes),tdy=new Set(gl0.map(g=>g.id));
@@ -279,15 +316,23 @@ temas(){
     const x0=g.te.map(tem).filter(Boolean).sort(bf),x=q?x0.filter(t=>t.titulo.toLowerCase().includes(q)):x0,sug=T.filter(t=>!g.te.includes(t.id)&&t.sede===g.sede),otros=sug.filter(t=>asg(t).length),libres=sug.filter(t=>!asg(t).length);
     const og=(l,n)=>l.length?`<optgroup label="${n}">${l.map(t=>`<option value="${t.id}">${esc(t.titulo)}</option>`).join('')}</optgroup>`:'';
     if(q&&!x.length)return '';const cl=COL['t'+g.id]&&!q;
-    return `<div class="card gh"><div class="bar" style="margin-bottom:${cl?0:10}px"><button type="button" class="arw" data-col="t${g.id}" data-keep="1" aria-expanded="${cl?'false':'true'}" title="${cl?'Expandir grupo':'Encoger grupo'}">${cl?'▸':'▾'}</button><h3 style="margin:0;flex:1;min-width:160px">${gh(g)}<span class="mu"> · ${x0.length} tema${x0.length===1?'':'s'}</span></h3></div>${cl?'':`${x.length?tbl(['Tema','Fecha','Acciones'],x.map(t=>`<tr><td><b>${esc(t.titulo)}</b>${t.link?`<a class="sl" href="${esc(t.link)}" target="_blank" rel="noopener" style="display:block">Ver diapositiva</a>`:''}</td><td>${GF(g,t).length?GF(g,t).map(dsh).join('<br>'):'<span class="mu">Sin fecha</span>'}</td><td style="white-space:nowrap"><button class="btn" data-fg="${g.id}" data-tid="${t.id}">Fecha</button> <button class="btn" data-edt="${t.id}">Editar</button> <button class="btn dg" data-unas="${g.id}" data-tid="${t.id}">Quitar</button></td></tr>`).join('')):'<div class="msg">Sin temas asignados.</div>'}${sug.length?`<select data-sug="${g.id}" style="margin-top:10px"><option value="">+ Asignar un tema (sugerencias)…</option>${og(otros,'Sugeridos de otros grupos')}${og(libres,'Disponibles sin asignar')}</select>`:''}`}</div>`}).join(''):'<div class="card"><div class="msg">Aún no hay grupos este mes. Créalos en la pestaña Grupos.</div></div>';
+    return `<div class="card gh"><div class="bar" style="margin-bottom:${cl?0:10}px"><button type="button" class="arw" data-col="t${g.id}" data-keep="1" aria-expanded="${cl?'false':'true'}" title="${cl?'Expandir grupo':'Encoger grupo'}">${cl?'▸':'▾'}</button><h3 style="margin:0;flex:1;min-width:160px">${gh(g)}<span class="mu"> · ${x0.length} tema${x0.length===1?'':'s'}</span></h3></div>${cl?'':`${x.length?tbl(['Tema','Fecha','Acciones'],x.map(t=>`<tr><td><b>${esc(t.titulo)}</b>${t.link?`<a class="sl" href="${esc(t.link)}" target="_blank" rel="noopener" style="display:block">Ver diapositiva</a>`:''}</td><td>${GF(g,t).length?GF(g,t).map(f=>fh(g,t,f)).join('<br>'):'<span class="mu">Sin fecha</span>'}</td><td style="white-space:nowrap"><button class="btn" data-fg="${g.id}" data-tid="${t.id}">Fecha</button> <button class="btn" data-edt="${t.id}">Editar</button> <button class="btn dg" data-unas="${g.id}" data-tid="${t.id}">Quitar</button></td></tr>`).join('')):'<div class="msg">Sin temas asignados.</div>'}${sug.length?`<select data-sug="${g.id}" style="margin-top:10px"><option value="">+ Asignar un tema (sugerencias)…</option>${og(otros,'Sugeridos de otros grupos')}${og(libres,'Disponibles sin asignar')}</select>`:''}`}</div>`}).join(''):'<div class="card"><div class="msg">Aún no hay grupos este mes. Créalos en la pestaña Grupos.</div></div>';
   if(q&&gl.length&&!left.trim())left='<div class="card"><div class="msg">Ningún grupo tiene un tema con ese nombre.</div></div>';
-  const qt=S.bt.trim().toLowerCase(),nSin=T.filter(t=>!asg(t).length).length,nAs=T.length-nSin,lista=T.filter(t=>t.titulo.toLowerCase().includes(qt)&&(S.tflt==='sin'?!asg(t).length:S.tflt==='asig'?asg(t).length>0:true)).map(t=>{const a=asg(t),libres=gl.filter(g=>g.sede===t.sede&&!g.te.includes(t.id));return `<div class="tc"><b>${esc(t.titulo)}</b>${bd(t.sede)}${t.link?`<div class="mu"><a class="sl" href="${esc(t.link)}" target="_blank" rel="noopener">Ver diapositiva</a></div>`:''}<div class="row2">${a.length?a.map(g=>`<span class="ar" style="margin:0">${esc(g.nombre)}${GF(g,t).length?' · '+GF(g,t).map(dsh).join(', '):' · sin fecha'}</span>`).join(''):'<span class="sd" style="margin:0">Sin asignar</span>'}</div><div class="row2">${libres.length?`<select data-asg="${t.id}"><option value="">Asignar a…</option>${libres.map(g=>`<option value="${g.id}">${esc(g.nombre)} · ${dias(g.dias)}</option>`).join('')}</select>`:''}<button class="btn" data-edt="${t.id}">Editar</button><button class="btn dg" data-deltema="${t.id}">Eliminar</button></div></div>`}).join('')||'<div class="msg">'+(T.length?'Ningún tema coincide.':'No hay temas.')+'</div>';
+  const qt=S.bt.trim().toLowerCase(),nSin=T.filter(t=>!asg(t).length).length,nAs=T.length-nSin,lista=T.filter(t=>t.titulo.toLowerCase().includes(qt)&&(S.tflt==='sin'?!asg(t).length:S.tflt==='asig'?asg(t).length>0:true)).map(t=>{const a=asg(t),libres=gl.filter(g=>g.sede===t.sede&&!g.te.includes(t.id));return `<div class="tc"><b>${esc(t.titulo)}</b>${bd(t.sede)}${t.link?`<div class="mu"><a class="sl" href="${esc(t.link)}" target="_blank" rel="noopener">Ver diapositiva</a></div>`:''}<div class="row2">${a.length?a.map(g=>`<span class="ar" style="margin:0">${esc(g.nombre)}${GF(g,t).length?' · '+GF(g,t).map(f=>fh(g,t,f)).join(', '):' · sin fecha'}</span>`).join(''):'<span class="sd" style="margin:0">Sin asignar</span>'}</div><div class="row2">${libres.length?`<select data-asg="${t.id}"><option value="">Asignar a…</option>${libres.map(g=>`<option value="${g.id}">${esc(g.nombre)} · ${dias(g.dias)}</option>`).join('')}</select>`:''}<button class="btn" data-edt="${t.id}">Editar</button><button class="btn dg" data-deltema="${t.id}">Eliminar</button></div></div>`}).join('')||'<div class="msg">'+(T.length?'Ningún tema coincide.':'No hay temas.')+'</div>';
   const seg=`<div class="bar"><div class="seg"><button class="${S.tv==='add'?'on':''}" data-tvw="add" data-keep="1">Agregar tema</button><button class="${S.tv==='ver'?'on':''}" data-tvw="ver" data-keep="1">Ver temas asignados</button></div></div>`;
   const chip=(k,t,n)=>`<button class="tg ${S.tflt===k?'on':''}" data-tflt="${k}" data-keep="1">${t} (${n})</button>`;
   const side=`<div class="side"><h3>Temas disponibles</h3><p class="mu" style="margin-bottom:8px">Todos tus temas. "Sin asignar" = no está en ningún grupo de este mes.</p><div class="bar" style="margin-bottom:8px"><input type="search" id="busqt" placeholder="Buscar un tema…" value="${esc(S.bt)}" style="width:100%"></div><div class="bar" style="gap:6px;margin-bottom:10px">${chip('all','Todos',T.length)}${chip('sin','Sin asignar',nSin)}${chip('asig','Asignados',nAs)}</div>${lista}</div>`;
   return seg+(S.tv==='add'?`<div class="split"><div>${form}</div>${side}</div>`:`<div class="bar"><input type="search" id="busq" placeholder="Buscar un tema asignado…" value="${esc(S.busq)}" style="min-width:240px;flex:1;max-width:420px"></div>${left}`);
 },
-cron(){
+cron(){return `<div class="bar"><div class="seg"><button class="${S.cvw!=='det'?'on':''}" data-cvw="cal" data-keep="1">Calendario</button><button class="${S.cvw==='det'?'on':''}" data-cvw="det" data-keep="1">Detalle y filtros</button></div></div>`+(S.cvw==='det'?V.cronDet():V.cronCal())},
+cronDet(){
+  const c=cronData(),m=c.m,nav=(inp)=>`<button class="btn" data-cdn="-1" data-keep="1" title="Anterior">‹</button>${inp}<button class="btn" data-cdn="1" data-keep="1" title="Siguiente">›</button>`;
+  const per=`<div class="bar"><label class="mu">Periodo <select id="cdm">${[['mes','Mes'],['sem','Semana'],['dia','Día'],['rng','Rango de fechas']].map(([k,v])=>`<option value="${k}"${m===k?' selected':''}>${v}</option>`).join('')}</select></label>${m==='mes'?nav(`<input type="month" id="cdmes" value="${c.mes}">`):m==='rng'?`<input type="date" id="cdd1" value="${c.d1}"><span class="mu">al</span><input type="date" id="cdd2" value="${c.d2}">`:nav(`<input type="date" id="cdd1" value="${S.cdd1}">`)}<span class="mu"><b>${esc(c.lab)}</b></span></div>`;
+  const fil=`<div class="bar"><label class="mu">Grupo <select id="cdg"><option value="">Todos</option>${c.gl.map(g=>`<option value="${g.id}"${g.id===S.cdg?' selected':''}>${esc(g.nombre)} · ${dias(g.dias)}${RO()?' · '+esc(g.sede):''}</option>`).join('')}</select></label><label class="mu">Área <select id="cda"><option value="">Todas</option>${D.areas.map(a=>`<option value="${esc(a)}"${a===S.cda?' selected':''}>${esc(a)}</option>`).join('')}</select></label><input type="search" id="cdq" placeholder="Buscar tema, grupo o persona…" value="${esc(S.cdq)}" style="min-width:220px;flex:1;max-width:340px"><label class="mu" style="display:flex;align-items:center;gap:6px"><input type="checkbox" id="cdp"${S.cdp?' checked':''}> Mostrar nombres de las personas</label></div>`;
+  const acc=`<div class="bar"><button class="btn pr" data-cdl="img" data-keep="1">Descargar imagen</button><button class="btn pr" data-cdl="pdf" data-keep="1">Descargar PDF</button><button class="btn" data-cdc data-keep="1">Copiar texto</button></div>`;
+  return per+fil+acc+cronRep(c.rows,c.lab,false);
+},
+cronCal(){
   const cr=D.crono[S.sede]||{},y=+S.mes.slice(0,4),mo=+S.mes.slice(5),ini=cr.ini||S.mes+'-01',fin=cr.fin||iso(new Date(y,mo,0));
   const by={};TE().forEach(t=>TF(t).forEach(f=>(by[f]=by[f]||[]).push(t)));
   const pal=['#1e9d1e','#6a1b9a','#3f4650','#00a58e','#f08a00','#2b2a6b','#2563eb','#b4234a'];
@@ -296,7 +341,7 @@ cron(){
   while((d<=end||d.getDay()!==0)&&k++<400){
     if(d.getDay()!==0){const f=iso(d);
       if(f<ini||f>fin)cells+='<div class="cl e"></div>';
-      else{const l=by[f]||[];cells+=`<div class="cl${f===hoy?' hoy':''}"><div class="dn">${d.getDate()}/${d.getMonth()+1}</div>${l.length?l.map(t=>`<div class="tm" style="background:${ck(t)}" title="${esc(t.titulo)}">${t.link?`<a href="${esc(t.link)}" data-cv="1" data-cvt="${esc(t.titulo)}" target="_blank" rel="noopener">${esc(t.titulo)}</a>`:esc(t.titulo)}</div>`).join(''):'<div style="flex:1"></div>'}</div>`}}
+      else{const l=by[f]||[];cells+=`<div class="cl${f===hoy?' hoy':''}"${l.length?` data-cday="${f}" style="cursor:pointer"`:''}><div class="dn">${d.getDate()}/${d.getMonth()+1}</div>${l.length?l.map(t=>{const hh=HT(t,f).join(' · ');return `<div class="tm" style="background:${ck(t)}" title="${esc(t.titulo)}${hh?' · '+hh:''}"><div>${esc(t.titulo)}${hh?`<small style="display:block;font-weight:600;text-transform:none;opacity:.9">${hh}</small>`:''}</div></div>`}).join(''):'<div style="flex:1"></div>'}</div>`}}
     d.setDate(d.getDate()+1)}
   const sf=TE().filter(t=>!t.fecha);
   return `<div class="bar"><label class="mu">Inicio <input type="date" id="cini" value="${ini}"></label><label class="mu">Cierre tentativo <input type="date" id="cfin" value="${fin}"></label></div><div class="tw"><div class="cal">${['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'].map(x=>`<div class="hd">${x}</div>`).join('')}${cells}</div></div>`+(sf.length?`<div class="card" style="margin-top:14px"><h3>Temas sin fecha</h3>${sf.map(t=>`<div>${esc(t.titulo)}${bd(t.sede)}</div>`).join('')}</div>`:'');
@@ -309,7 +354,7 @@ notas(){
   if(!T.find(t=>t.id===S.tema))S.tema=T[0].id;
   const N=D.notas[S.tema]||{},val=rows.map(r=>N[r[0]]).filter(x=>x!==undefined&&x!==''),vis=q?rows.filter(([i])=>alu(i).nombre.toLowerCase().includes(q)||String(alu(i).dni).includes(q)):rows;
   const gb=G.length>1?`<div class="bar"><div class="seg"><button class="${S.gn?'':'on'}" data-gn="" data-keep="1">Todos los grupos</button>${G.map(g=>`<button class="${S.gn===g.id?'on':''}" data-gn="${g.id}" data-keep="1">${esc(g.nombre)}${RO()?' · '+esc(g.sede):''}</button>`).join('')}</div></div>`:'';
-  return `<div class="bar"><b>Elige el tema a evaluar:</b><select id="tema">${T.map(t=>`<option value="${t.id}"${t.id===S.tema?' selected':''}>${esc(t.titulo)}${RO()?' · '+esc(t.sede):''}</option>`).join('')}</select><input type="search" id="busqn" placeholder="Buscar alumno…" value="${esc(S.bn)}" style="min-width:200px"></div>${gb}<div class="card">`+(vis.length?tbl(['Alumno','DNI','Área','Grupo','Nota (0–20)'],vis.map(([i,g])=>`<tr><td><b>${esc(alu(i).nombre)}</b>${bd(alu(i).sede)}</td><td>${esc(alu(i).dni)}</td><td>${arT(alu(i).area)}</td><td>${esc(g.nombre)}</td><td><input class="nota" type="number" min="0" max="20" step="0.5" data-n="${i}" value="${N[i]??''}" placeholder="0–20"></td></tr>`).join('')):'<div class="msg">'+(rows.length?'Nadie coincide con la búsqueda.':'No hay alumnos en grupos este mes.')+'</div>')+`</div>${val.length?`<div class="sum"><span style="--c:var(--g)">Promedio del tema: ${(val.reduce((a,b)=>a+ +b,0)/val.length).toFixed(1)}</span></div>`:''}`;
+  return `<div class="bar"><b>Elige el tema a evaluar:</b><select id="tema">${T.map(t=>`<option value="${t.id}"${t.id===S.tema?' selected':''}>${esc(t.titulo)}${RO()?' · '+esc(t.sede):''}</option>`).join('')}</select><input type="search" id="busqn" placeholder="Buscar alumno…" value="${esc(S.bn)}" style="min-width:200px"></div>${gb}<div class="card">`+(vis.length?tbl(['Alumno','Nota (0–20)','Área','Grupo','DNI'],vis.map(([i,g])=>`<tr><td><b>${esc(alu(i).nombre)}</b>${bd(alu(i).sede)}</td><td><input class="nota" type="number" min="0" max="20" step="0.5" data-n="${i}" value="${N[i]??''}" placeholder="0–20"></td><td>${arT(alu(i).area)}</td><td>${esc(g.nombre)}</td><td>${esc(alu(i).dni)}</td></tr>`).join('')):'<div class="msg">'+(rows.length?'Nadie coincide con la búsqueda.':'No hay alumnos en grupos este mes.')+'</div>')+`</div>${val.length?`<div class="sum"><span style="--c:var(--g)">Promedio del tema: ${(val.reduce((a,b)=>a+ +b,0)/val.length).toFixed(1)}</span></div>`:''}`;
 },
 pun(){
   const G=gs(S.mes);if(!AL().length)return '<div class="msg">Aún no hay personal en esta sede. Regístralo en la pestaña Personal.</div>';
@@ -348,8 +393,10 @@ rep(){
 repa(){
   const h=`<div class="bar"><b>Fecha del reporte:</b><input type="date" id="fecha" value="${S.fecha}"><button class="btn" data-hoy data-keep="1">Hoy</button>`,L=ORD(AL().map(a=>a.id));
   if(!L.length)return h+'</div><div class="card"><div class="msg">Aún no hay personal en esta sede. Regístralo en la pestaña Personal.</div></div>';
-  if(!L.includes(S.ra))S.ra=L[0];
-  return h+`<label class="mu" style="display:flex;align-items:center;gap:8px;margin-left:auto">Asesor<select id="asesor">${L.map(i=>`<option value="${i}"${i===S.ra?' selected':''}>${esc(alu(i).nombre)}${alu(i).area?' · '+esc(alu(i).area):''}${RO()?' · '+esc(alu(i).sede):''}</option>`).join('')}</select></label></div>`+asCard(S.ra);
+  const nq=x=>String(x||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''),qa=nq(S.bra.trim()),Lf=qa?L.filter(i=>nq(alu(i).nombre).includes(qa)):L,bx=`<input type="search" id="busqra" placeholder="Buscar asesor por nombre…" value="${esc(S.bra)}" style="min-width:220px">`;
+  if(!Lf.length)return h+bx+'</div><div class="card"><div class="msg">Ningún asesor coincide con la búsqueda.</div></div>';
+  if(!Lf.includes(S.ra))S.ra=Lf[0];
+  return h+bx+`<label class="mu" style="display:flex;align-items:center;gap:8px;margin-left:auto">Asesor<select id="asesor">${Lf.map(i=>`<option value="${i}"${i===S.ra?' selected':''}>${esc(alu(i).nombre)}${alu(i).area?' · '+esc(alu(i).area):''}${RO()?' · '+esc(alu(i).sede):''}</option>`).join('')}</select></label></div>`+asCard(S.ra);
 },
 datos(){
   return `<div class="card"><p style="margin-bottom:10px">Todo se guarda automáticamente en la hoja de Google y los alumnos ven su información al ingresar. Aquí puedes descargar una copia de respaldo (<b>datos.json</b>) o importar datos.</p><div class="bar"><button class="btn pr" data-exp data-keep="1">Descargar datos.json</button><label class="btn">Importar datos<input type="file" id="imp" accept=".json" hidden></label></div></div>`;
@@ -361,7 +408,7 @@ function notasGrupo(g,ids){
   if(!ids.length)return '<p class="mu">No hay alumnos en este grupo.</p>';
   if(!T.length)return '<p class="mu">Aún no hay temas con fecha hasta este día.</p>';
   const pill=n=>has(n)?`<span class="pt" style="--c:var(${col(+n)})">${n}</span>`:'<span class="mu">—</span>',pp=p=>p===null?'<span class="mu">—</span>':`<span class="pt" style="--c:var(${col(p)})">${p.toFixed(1)}</span>`;
-  const head=['Alumno',...T.map(t=>`${esc(t.titulo)}<br><small style="font-weight:600;opacity:.8">${GF(g,t).map(dsh).join(', ')||'Sin fecha'}</small>`),'Promedio'];
+  const head=['Alumno',...T.map(t=>`${esc(t.titulo)}<br><small style="font-weight:600;opacity:.8">${GF(g,t).map(f=>fh(g,t,f)).join(', ')||'Sin fecha'}</small>`),'Promedio'];
   const rows=ids.map(i=>{const v=T.map(t=>nt(t,i));return `<tr><td style="white-space:nowrap"><b>${esc(alu(i).nombre)}</b></td>${v.map(n=>`<td style="text-align:center">${pill(n)}</td>`).join('')}<td style="text-align:center">${pp(prom(v))}</td></tr>`}).join('');
   const foot=`<tr style="background:#f3f6f2"><td><b>Promedio del tema</b></td>${T.map(t=>`<td style="text-align:center"><b>${f1(prom(ids.map(i=>nt(t,i))))}</b></td>`).join('')}<td style="text-align:center"><b>${f1(prom(ids.flatMap(i=>T.map(t=>nt(t,i)))))}</b></td></tr>`;
   return tbl(head,rows+foot);
@@ -385,6 +432,7 @@ function barChart(pts){
   pts.forEach((p,i)=>{const c=p.v>=14?'#009640':p.v>=APR?'#f07d00':'#d63a3a',lb=p.t.length>20?p.t.slice(0,19)+'…':p.t;s+=`<rect x="${x(i)-bw/2}" y="${y(p.v)}" width="${bw}" height="${(p.v/20)*ph}" rx="4" fill="${c}"/><text x="${x(i)}" y="${y(p.v)-5}" text-anchor="middle" font-size="11" font-weight="700" fill="#1c2a22">${(+p.v).toFixed(1).replace('.0','')}</text><text x="${x(i)}" y="${H-B+16}" text-anchor="end" font-size="11" fill="#6b7a70" transform="rotate(-35 ${x(i)} ${H-B+16})">${esc(lb)}</text>`});
   return s+'</svg>';
 }
+function repTe(g,r){const hoy=D.temas.filter(t=>t.sede===g.sede&&g.te.includes(t.id)&&GF(g,t).includes(S.fecha)).sort((a,b)=>a.titulo.localeCompare(b.titulo)),ex=(r.te||[]).map(tem).filter(t=>t&&!hoy.includes(t));return [...hoy,...ex]}
 function repCard(g,ed,shot){
   const r=D.rep[S.fecha+'|'+g.id]||{},ids=ORD(mem(g)),di=[...ids,...ORD(XT(S.fecha,g))],day=D.asist[S.fecha]||{},f=fromIso(S.fecha),hay=g.dias.includes(f.getDay());
   const te=D.temas.filter(t=>t.sede===g.sede&&g.te.includes(t.id));
@@ -393,12 +441,12 @@ function repCard(g,ed,shot){
   const A=asistG(g,ids),tp=A.reduce((x,a)=>x+a.c.P+a.c.T,0),tb=A.reduce((x,a)=>x+a.base,0),gp=tb?Math.round(tp/tb*100):null;
   const T=gTemas(g,ids),AP=aprobT(T,ids),sn=AP.reduce((x,a)=>x+a.n,0),sa=AP.reduce((x,a)=>x+a.ap,0),gpr=prom(ids.flatMap(i=>T.map(t=>nt(t,i))));
   let h=`<div class="rp"><div class="rh" style="--hc:${SC[g.sede]||SC.MASTER}"><img src="${$('.brand img').src}" alt=""><div><div class="rt">Reporte de capacitación</div><div class="rs">${esc(g.sede)}</div></div><div class="rd">${DN[f.getDay()]} ${f.getDate()} de ${MS[f.getMonth()]} de ${f.getFullYear()}<br>${esc(g.nombre)} · ${dias(g.dias)}</div></div>`;
+  const tl=repTe(g,r),opx=te.filter(t=>!GF(g,t).includes(S.fecha)).sort((x,y)=>(GF(g,x)[0]||'9').localeCompare(GF(g,y)[0]||'9')||x.titulo.localeCompare(y.titulo));
+  if(hay||tl.length)h+=`<div class="rtm" style="--hc:${SC[g.sede]||SC.MASTER}"><div class="rtl">Tema del día</div><div class="rtc">${tl.length?tl.map(t=>`<span class="rtn">${esc(t.titulo)}</span>`).join(''):'<span class="mu">Sin tema programado para hoy</span>'}${ed&&opx.length?`<button type="button" class="rtp" data-rto data-keep="1" title="Agregar otro tema" aria-expanded="${S.rto?'true':'false'}">${S.rto?'−':'+'}</button>`:''}</div>${ed&&S.rto&&opx.length?`<div class="ddp" style="margin:10px 0 0">${opx.map(t=>`<button type="button" class="ddi${(r.te||[]).includes(t.id)?' on':''}" data-rt="${t.id}" data-gid="${g.id}" data-keep="1"><i>${(r.te||[]).includes(t.id)?'✓':''}</i><span>${esc(t.titulo)}</span></button>`).join('')}</div>`:''}</div>`;
   if(hay)h+=`<div class="kp">${tile('Asistieron',asi,'#009640')}${tile('Puntuales',c.P,'#009640')}${tile('Llegaron tarde',c.T,'#f07d00')}${tile('Faltaron',c.F,'#d63a3a')}${tile('Reprogramados',c.R,'#2f7fd1')}</div>`;
   h+='<div class="rb">';
   if(hay){
     h+=`<h4>Asistencia del día: ${pc}%${sin?` · ${sin} sin marcar`:''}</h4><div class="prog"><i style="width:${pc}%"></i></div><h4>Detalle de asistencia del día</h4>`+(di.length?`<div class="ad">${Object.keys(ST).concat('').map(k=>{const x=di.filter(i=>(day[i]||'')===k).sort((p,q2)=>(D.areas.indexOf(alu(p).area)+1||99)-(D.areas.indexOf(alu(q2).area)+1||99)||alu(p).nombre.localeCompare(alu(q2).nombre));if(!x.length)return '';const cc=k?`var(${ST[k][2]})`:'#aab';return `<div class="ab" style="--c:${cc}"><div class="abh"><span class="pt" style="--c:${cc}">${k?ST[k][1]:'Sin marcar'}</span><b>${x.length}</b></div>${x.map(i=>`<div class="abi"><span>${esc(alu(i).nombre)}</span>${arT(alu(i).area)}</div>`).join('')}</div>`}).join('')}</div>`:'<div class="msg">No hay alumnos en este grupo.</div>');
-    const sel=(r.te||[]).map(tem).filter(Boolean),hoyF=t=>GF(g,t).includes(S.fecha)?0:1;
-    h+=`<h4>Temas tratados</h4>`+(ed?(te.length?`<div class="bar" style="margin:0 0 8px"><button type="button" class="btn" data-rto data-keep="1">${S.rto?'▾':'▸'} ${sel.length?`Elegir temas (${sel.length})`:'Elegir temas de hoy'}</button></div>${S.rto?`<div class="ddp">${te.slice().sort((x,y)=>hoyF(x)-hoyF(y)||(GF(g,x)[0]||'9').localeCompare(GF(g,y)[0]||'9')||x.titulo.localeCompare(y.titulo)).map(t=>`<button type="button" class="ddi${sel.includes(t)?' on':''}" data-rt="${t.id}" data-gid="${g.id}" data-keep="1"><i>${sel.includes(t)?'✓':''}</i><span>${esc(t.titulo)}</span>${hoyF(t)?'':'<span class="ar" style="margin-left:auto">hoy</span>'}</button>`).join('')}</div>`:''}`:'<span class="mu">Este grupo no tiene temas asignados este mes.</span>'):'')+`<div class="bar" style="margin:0">${sel.length?sel.map(t=>`<span class="ar" style="margin:0;font-size:13px">${esc(t.titulo)}</span>`).join(''):'<span class="mu">—</span>'}</div>`;
   }
   h+=`<h4>Asistencia acumulada hasta esta fecha</h4><div class="kp" style="padding:6px 0">${tile('Asistencia del grupo',gp===null?'—':gp+'%',pcol(gp))}${tile('Alumnos',ids.length,'#1c2b45')}</div>`;
   h+=ids.length&&tb?tbl(['Alumno','DNI','Área','Puntual','Tarde','Faltó','Reprog.','% asistencia'],A.map(a=>`<tr><td style="white-space:nowrap"><b>${esc(alu(a.i).nombre)}</b></td><td>${esc(alu(a.i).dni)}</td><td>${arT(alu(a.i).area)}</td><td style="text-align:center">${a.c.P}</td><td style="text-align:center">${a.c.T}</td><td style="text-align:center">${a.c.F}</td><td style="text-align:center">${a.c.R}</td><td style="text-align:center"><span class="pt" style="--c:${pcol(a.pct)}">${a.pct===null?'—':a.pct+'%'}</span></td></tr>`).join('')):'<p class="mu">Aún no hay asistencias registradas.</p>';
@@ -415,7 +463,7 @@ function repTxt(g){
   let t=`REPORTE DE CAPACITACIÓN\nSede: ${g.sede}\n${DN[d.getDay()]} ${d.getDate()}/${p2(d.getMonth()+1)}/${d.getFullYear()} · ${g.nombre} (${dias(g.dias)})\n`;
   if(g.dias.includes(d.getDay())){t+=`\nASISTENCIA DEL DÍA\nAsistieron: ${n('P')+n('T')} (puntuales ${n('P')}, tarde ${n('T')}) · Faltaron: ${n('F')} · Reprogramados: ${n('R')}\n`;
     Object.keys(ST).concat('').forEach(k=>{const x=di.filter(i=>(day[i]||'')===k);if(x.length)t+=`${k?ST[k][1]:'Sin marcar'} (${x.length}): ${x.map(i=>alu(i).nombre).join(', ')}\n`});
-    const te=(r.te||[]).map(i=>tem(i)?.titulo).filter(Boolean);if(te.length)t+=`\nTEMAS: ${te.join(', ')}\n`}
+    const te=repTe(g,r).map(x=>x.titulo);if(te.length)t+=`\nTEMAS: ${te.join(', ')}\n`}
   const A=asistG(g,ids);
   if(A.some(a=>a.base)){t+=`\nASISTENCIA ACUMULADA\n`;A.forEach(a=>{t+=`${alu(a.i).nombre}: P ${a.c.P}, T ${a.c.T}, F ${a.c.F}, R ${a.c.R} · ${a.pct===null?'—':a.pct+'%'}\n`})}
   const T=gTemas(g,ids),AP=aprobT(T,ids);
@@ -452,10 +500,12 @@ function asTxt(i){
   T.forEach(x=>{const n=nt(x,i);t+=`${x.titulo}: ${has(n)?n+(n>=APR?' (aprobado)':' (desaprobado)'):'pendiente'}\n`});
   return t.trim();
 }
+async function imgsData(w){await Promise.all([...w.querySelectorAll('img')].map(async im=>{const u=im.getAttribute('src')||'';if(!u||u.startsWith('data:'))return;const m=u.match(/drive\.google\.com\/thumbnail\?id=([^&#]+)/),c=[...(m?['https://lh3.googleusercontent.com/d/'+m[1]+'=w400']:[]),u,'https://wsrv.nl/?url='+encodeURIComponent(u)+'&w=400'];for(const x of c){try{const r=await fetch(x,{mode:'cors',credentials:'omit',referrerPolicy:'no-referrer'});if(!r.ok)continue;const b=await r.blob();if(!/^image\//.test(b.type))continue;const d=await new Promise((ok,no)=>{const f=new FileReader();f.onload=()=>ok(f.result);f.onerror=no;f.readAsDataURL(b)});await new Promise(r2=>{im.onload=r2;im.onerror=r2;im.src=d;if(im.complete)r2()});return}catch(e){}}}))}
 async function descargar(html,nm,txt,fm){
   const w=document.createElement('div');w.className='snap';w.style.cssText='position:fixed;left:-9999px;top:0;width:840px;background:#f3f6f2;padding:20px;font-family:Figtree,system-ui,sans-serif;color:#1c2a22';w.innerHTML=html;document.body.appendChild(w);{const nd=w.scrollWidth;w.style.width=(nd>840?Math.min(1700,nd+20):840)+'px'}
   const a=document.createElement('a');
   try{await Promise.race([Promise.all([...w.querySelectorAll('img')].map(im=>im.complete?0:new Promise(r=>{im.addEventListener('load',r);im.addEventListener('error',r)}))),new Promise(r=>setTimeout(r,3000))]);
+    await Promise.race([imgsData(w),new Promise(r=>setTimeout(r,12000))]);
     const cv=await html2canvas(w,{backgroundColor:'#f3f6f2',scale:2,logging:false,useCORS:true});
     if(fm==='pdf'){
       if(!window.jspdf)throw new Error('sin jsPDF');
@@ -517,6 +567,9 @@ document.addEventListener('click',async e=>{
   if(d.ga!==undefined){S.ga=d.ga;return R()}
   if(d.gn!==undefined){S.gn=d.gn;return R()}
   if('rto' in d){S.rto=!S.rto;return R()}
+  if(d.cvw){S.cvw=d.cvw;return R()}
+  if(d.cdn){const n=+d.cdn;if(S.cdm==='mes'){const mm=S.cdmes||S.mes,x=new Date(+mm.slice(0,4),+mm.slice(5)-1+n,1);S.cdmes=iso(x).slice(0,7)}else{const x=fromIso(S.cdd1);x.setDate(x.getDate()+n*(S.cdm==='sem'?7:1));S.cdd1=iso(x);if(S.cdd2<S.cdd1)S.cdd2=S.cdd1}return R()}
+  if(d.cdl||'cdc' in d){const c=cronData();if(d.cdl){t.disabled=true;await descargar(cronRep(c.rows,c.lab,true),'cronograma-'+slug(RO()?'master':S.sede)+'-'+c.d1+(c.d2!==c.d1?'_'+c.d2:''),cronTxt(c),d.cdl);t.disabled=false}else{try{await navigator.clipboard.writeText(cronTxt(c));t.textContent='¡Copiado!';setTimeout(()=>t.textContent='Copiar texto',1500)}catch(err){prompt('Copia el cronograma:',cronTxt(c))}}return}
   if(d.rg){S.rg=d.rg;return R()}
   if(d.tvw){S.tv=d.tvw;return R()}
   if(d.tflt){S.tflt=d.tflt;return R()}
@@ -532,8 +585,8 @@ document.addEventListener('click',async e=>{
   else if('addtema' in d){const ti=$('#tt').value.trim();if(!ti)return $('#tt').focus();const x={id:uid(),titulo:ti,link:fixLink($('#tl').value),fechas:[],fecha:'',desc:$('#td').value.trim(),sede:S.sede},sg=$('#tg').value,g=sg?grp(sg):null;if(g){const r=await fechaDlg(g,x);if(r===null)return;g.te.push(x.id);setGF(g,x,r)}D.temas.push(x)}
   else if(d.edt){const x=tem(d.edt),r=await temaDlg(x);if(!r)return;x.titulo=r.titulo;x.link=fixLink(r.link);x.desc=r.desc;r.all.forEach(id=>{const g=grp(id),i=g.te.indexOf(x.id),w=r.gids.includes(id);if(w&&i<0)g.te.push(x.id);if(!w&&i>=0){g.te.splice(i,1);setGF(g,x,[])}})}
   else if(d.fg){const g=grp(d.fg),x=tem(d.tid),r=await fechaDlg(g,x);if(r===null)return;setGF(g,x,r)}
-  else if(d.deltema){if(!await confirmar('¿Eliminar este tema y sus notas?'))return;D.temas=D.temas.filter(z=>z.id!==d.deltema);delete D.notas[d.deltema];D.grupos.forEach(g=>{g.te=g.te.filter(z=>z!==d.deltema);if(g.tf)delete g.tf[d.deltema]})}
-  else if(d.unas){const g=grp(d.unas);g.te=g.te.filter(z=>z!==d.tid);if(g.tf)delete g.tf[d.tid]}
+  else if(d.deltema){if(!await confirmar('¿Eliminar este tema y sus notas?'))return;D.temas=D.temas.filter(z=>z.id!==d.deltema);delete D.notas[d.deltema];D.grupos.forEach(g=>{g.te=g.te.filter(z=>z!==d.deltema);if(g.tf)delete g.tf[d.deltema];if(g.th)delete g.th[d.deltema]})}
+  else if(d.unas){const g=grp(d.unas);g.te=g.te.filter(z=>z!==d.tid);if(g.tf)delete g.tf[d.tid];if(g.th)delete g.th[d.tid]}
   else if('ng' in d){const r=await grupoDlg();if(!r)return;D.grupos.push({id:uid(),nombre:r.nombre,dias:r.dias,sede:S.sede,mes:S.mes,al:[],te:[],tf:{}})}
   else if(d.eg){const g=grp(d.eg),r=await grupoDlg(g);if(!r)return;g.nombre=r.nombre;g.dias=r.dias}
   else if(d.dg){if(!await confirmar('¿Eliminar este grupo? Los alumnos y temas no se borran, solo quedan sin grupo.'))return;D.grupos=D.grupos.filter(g=>g.id!==d.dg);Object.keys(D.rep).filter(k=>k.endsWith('|'+d.dg)).forEach(k=>delete D.rep[k]);Object.keys(D.extra||{}).filter(k=>k.endsWith('|'+d.dg)).forEach(k=>delete D.extra[k])}
@@ -557,6 +610,7 @@ document.addEventListener('click',async e=>{
   e.preventDefault();const u=a.getAttribute('href');
   if(await confirmarSN('<h3 style="font-size:17px">¿Ver la diapositiva?</h3><p>Se abrirá <b>'+esc(a.dataset.cvt||'el tema')+'</b> en una pestaña nueva.</p>'))window.open(u,'_blank','noopener');
 });
+document.addEventListener('click',e=>{const c=e.target.closest&&e.target.closest('[data-cday]');if(c)diaDlg(c.dataset.cday)});
 document.addEventListener('change',e=>{
   const t=e.target,d=t.dataset;
   if(t.id==='sede'){S.sede=t.value;S.tema='';S.pg='';S.ag='';S.rg='';S.ra='';R()}
@@ -567,6 +621,13 @@ document.addEventListener('change',e=>{
   else if(t.id==='asesor'){S.ra=t.value;R()}
   else if(t.id==='rgsel'){S.rg=t.value;R()}
   else if(t.id==='gasel'){S.ga=t.value;R()}
+  else if(t.id==='cdm'){S.cdm=t.value;R()}
+  else if(t.id==='cdmes'&&t.value){S.cdmes=t.value;R()}
+  else if(t.id==='cdd1'&&t.value){S.cdd1=t.value;if(S.cdd2<t.value)S.cdd2=t.value;R()}
+  else if(t.id==='cdd2'&&t.value){S.cdd2=t.value;R()}
+  else if(t.id==='cdg'){S.cdg=t.value;R()}
+  else if(t.id==='cda'){S.cda=t.value;R()}
+  else if(t.id==='cdp'){S.cdp=t.checked;R()}
   else if(RO())return;
   else if(d.n){const N=D.notas[S.tema]=D.notas[S.tema]||{};t.value===''?delete N[d.n]:N[d.n]=Math.min(20,Math.max(0,+t.value));save();R()}
   else if(d.ar){alu(d.ar).area=t.value;save();R()}
@@ -580,7 +641,7 @@ document.addEventListener('input',e=>{
   if(t.classList&&t.classList.contains('pn')){t.value=t.value.replace(/\D/g,'').slice(0,1);const i=+t.id.slice(2);if(t.value&&i<PN-1)$('#pn'+(i+1)).focus();if(t.value&&i===PN-1&&PV)PV();return}
   if(t.id==='an'||t.id==='ad'){dupHint();return}
   if(t.id==='ro'){if(RO())return;const k=S.fecha+'|'+t.dataset.gid,r=D.rep[k]=D.rep[k]||{};r.obs=t.value;save();return}
-  const bm={busq:'busq',busqp:'bp',busqpe:'bpe',busqn:'bn',busqt:'bt',busqpu:'bpu'};if(bm[t.id]){S[bm[t.id]]=t.value;const p=t.selectionStart,id=t.id;R();const b=$('#'+id);b.focus();b.setSelectionRange(p,p)}
+  const bm={busq:'busq',busqp:'bp',busqpe:'bpe',busqn:'bn',busqt:'bt',busqpu:'bpu',busqra:'bra',cdq:'cdq'};if(bm[t.id]){S[bm[t.id]]=t.value;const p=t.selectionStart,id=t.id;R();const b=$('#'+id);b.focus();b.setSelectionRange(p,p)}
 });
 document.addEventListener('keydown',e=>{
   if(e.key==='Backspace'&&e.target.classList&&e.target.classList.contains('pn')&&!e.target.value){const i=+e.target.id.slice(2);if(i>0)$('#pn'+(i-1)).focus()}
