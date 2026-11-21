@@ -153,14 +153,14 @@ D=Object.assign(DEF(),D||{});
 const save=()=>{try{syncF()}catch(e){}try{localStorage.setItem(K,JSON.stringify(D))}catch(e){}try{hojaMarcar()}catch(e){}};
 const hash=async(d,c)=>[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(d+':'+c)))].map(b=>p2(b.toString(16))).join('');
 /* ---------- conexión con la hoja de Google (Apps Script) ---------- */
-const HOJA={sucio:false,ocupado:false,timer:null};
+const HOJA={sucio:false,ocupado:false,timer:null,snap:null,refr:false};
 const hojaApi=async b=>(await fetch(URL_API,{method:'POST',body:JSON.stringify(b)})).json();
 function hojaEstado(t,col,fijo){let e=$('#hsync');if(!e){e=document.createElement('div');e.id='hsync';document.body.appendChild(e)}e.textContent=t;e.style.background=col;e.style.opacity=1;clearTimeout(e._t);if(!fijo)e._t=setTimeout(()=>{e.style.opacity=0},2500)}
-function hojaMarcar(){if(!URL_API||!AU||AU==='MASTER')return;HOJA.sucio=true;clearTimeout(HOJA.timer);HOJA.timer=setTimeout(hojaPush,1200);hojaEstado('Guardando…','#374151',true)}
+function hojaMarcar(){if(!URL_API||!AU||AU==='MASTER')return;if(!HOJA.sucio&&HOJA.snap!==null&&JSON.stringify(D)===HOJA.snap)return;/* sin cambios reales: no avisa ni guarda */HOJA.sucio=true;clearTimeout(HOJA.timer);HOJA.timer=setTimeout(hojaPush,1200);hojaEstado('Guardando…','#374151',true)}
 async function hojaPush(){
   if(HOJA.ocupado)return false;if(!HOJA.sucio)return true;
-  HOJA.ocupado=true;HOJA.sucio=false;let ok=false;
-  try{const j=await hojaApi({accion:'guardar',sede:AU,clave:CK,datos:D});if(!j.ok)throw new Error(j.error||'Error');ok=true;hojaEstado('Guardado en la hoja ✓','#15803d')}
+  HOJA.ocupado=true;HOJA.sucio=false;let ok=false;const env=JSON.stringify(D);
+  try{const j=await hojaApi({accion:'guardar',sede:AU,clave:CK,datos:D});if(!j.ok)throw new Error(j.error||'Error');ok=true;HOJA.snap=env;hojaEstado('Guardado en la hoja ✓','#15803d')}
   catch(e){HOJA.sucio=true;hojaEstado('No se pudo guardar'+(e.message&&e.message!=='Failed to fetch'?': '+e.message:' (sin conexión)')+'. Se reintentará.','#b91c1c',true);clearTimeout(HOJA.timer);HOJA.timer=setTimeout(hojaPush,15000)}
   HOJA.ocupado=false;
   if(ok&&HOJA.sucio)return hojaPush();
@@ -168,6 +168,27 @@ async function hojaPush(){
 }
 async function hojaFlush(){clearTimeout(HOJA.timer);while(HOJA.ocupado)await new Promise(r=>setTimeout(r,200));if(HOJA.sucio)await hojaPush();return !HOJA.sucio}
 addEventListener('beforeunload',e=>{if(HOJA.sucio||HOJA.ocupado){e.preventDefault();e.returnValue=''}});
+/* Trae de la hoja las notas, capturas y exámenes nuevos (p. ej. un alumno que rindió otra vez) sin pisar nada del capacitador */
+async function hojaRefrescar(){
+  if(!URL_API||!AU||HOJA.sucio||HOJA.ocupado||HOJA.refr||$('#app').hidden||document.querySelector('.ov'))return;
+  HOJA.refr=true;
+  try{
+    const j=await hojaApi({accion:'cargar',sede:AU,clave:CK});
+    if(!j.ok||HOJA.sucio||HOJA.ocupado||document.querySelector('.ov'))return;
+    const d=j.datos,antes=JSON.stringify([D.notas,D.fotos,D.fexa,D.examenes,D.ajustes]);
+    const nuevo=JSON.stringify([d.notas||{},d.fotos||{},d.fexa||{},d.examenes||[],d.ajustes||[]]);
+    if(nuevo===antes)return;
+    D.notas=d.notas||{};D.fotos=d.fotos||{};D.fexa=d.fexa||{};D.examenes=d.examenes||[];D.ajustes=d.ajustes||[];
+    HOJA.snap=JSON.stringify(D);
+    try{localStorage.setItem(K,JSON.stringify(D))}catch(e){}
+    const ae=document.activeElement;if(!(ae&&/^(INPUT|TEXTAREA|SELECT)$/.test(ae.tagName)))R();
+  }catch(e){}finally{HOJA.refr=false}
+}
+setInterval(()=>{if(!document.hidden)hojaRefrescar()},45000);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)hojaRefrescar()});
+addEventListener('focus',()=>hojaRefrescar());
+document.addEventListener('click',e=>{if(e.target.closest&&e.target.closest('#nav button'))setTimeout(hojaRefrescar,80)});
+
 const tieneSede=(x,s)=>['alumnos','grupos','temas'].some(k=>(x[k]||[]).some(i=>(i.sede||SEDES[0])===s));
 function hojaAplicar(d){
   const vacio=!(d.alumnos.length||d.grupos.length||d.temas.length);
@@ -178,7 +199,7 @@ function hojaAplicar(d){
     if(fuente){D=Object.assign(DEF(),fuente);if(AU!=='MASTER'){HOJA.sucio=true;hojaPush()}}
     return;
   }
-  D=Object.assign(DEF(),d);norm();migra();try{localStorage.setItem(K,JSON.stringify(D))}catch(e){}
+  D=Object.assign(DEF(),d);norm();migra();HOJA.snap=JSON.stringify(D);try{localStorage.setItem(K,JSON.stringify(D))}catch(e){}
 }
 async function hojaCargar(){
   if(!URL_API)return true;
@@ -743,7 +764,7 @@ document.addEventListener('click',async e=>{
   else if(d.rtr){const r=D.rep[S.fecha+'|'+d.rtr];if(r){delete r.ov;delete r.te}}
   else if('exadd' in d){const r=await examDlg(null,S.tab==='notas'?S.gn:'');if(!r)return;D.examenes=D.examenes||[];const nid=uid();D.examenes.push({id:nid,titulo:r.titulo,f:r.f,h:r.h,g:r.g,sede:S.sede});if(S.tab==='notas'){S.ne=nid;S.mes=r.f.slice(0,7)}}
   else if(d.exed){const x=(D.examenes||[]).find(z=>z.id===d.exed);if(!x)return;const r=await examDlg(x);if(!r)return;Object.assign(x,{titulo:r.titulo,f:r.f,h:r.h,g:r.g})}
-  else if(d.exdel){const x=(D.examenes||[]).find(z=>z.id===d.exdel);if(!x)return;if(!await confirmar('<h3 style="font-size:17px">¿Quitar este examen?</h3><p><b>'+esc(x.titulo)+'</b> · '+dsh(x.f)+'</p>'+(exNotas(x)?'<p><b>Tiene '+exNotas(x)+' nota(s) registradas: también se borrarán.</b></p>':'')))return;delete D.notas[x.id];D.examenes=D.examenes.filter(z=>z.id!==d.exdel)}
+  else if(d.exdel){const x=(D.examenes||[]).find(z=>z.id===d.exdel);if(!x)return;if(!await confirmar('<h3 style="font-size:17px">¿Quitar este examen?</h3><p><b>'+esc(x.titulo)+'</b> · '+dsh(x.f)+'</p>'+(exNotas(x)?'<p><b>Tiene '+exNotas(x)+' nota(s) registradas: también se borrarán.</b></p>':'')))return;delete D.notas[x.id];(D.exDel=D.exDel||[]).push(x.id);D.examenes=D.examenes.filter(z=>z.id!==d.exdel)}
   else return;
   save();R();
 });
@@ -768,7 +789,7 @@ const histDlg=(k,i,titulo,sub)=>{
   <div class="hx-card"><div><div class="hx-l">NOTA MÁS RECIENTE</div><div class="hx-big" style="color:var(${base!==null?col(base):'--mu'})">${base!==null?nTxt(base):'—'}</div></div><div class="hx-m">${at[0]?esc(fechaHora(at[0].f))+'<br>':''}${esc(titulo)}</div>${ed?'<button class="hx-pen" id="hxe" title="Ajustar la nota">✎</button>':''}</div>
   <div id="ajp" hidden></div>
   <div class="hx-t">Historial <span class="hx-c">${at.length}</span></div>
-  ${at.length?at.map((r,j)=>`<div class="hx-it"><div><div class="hx-i1">${esc(fechaHora(r.f))}${j===0?'<span class="hx-b">ÚLTIMO EXAMEN</span>':''}</div><div class="hx-i2">${esc(titulo)}</div></div><div class="hx-act">${r.n!==null&&r.n!==undefined?`<span class="hx-n" style="--c:var(${col(+r.n)})">${nTxt(r.n)}</span>`:''}<button class="btn pr" data-ver="${j}" style="flex:none;padding:10px 16px">Ver examen</button></div></div>`).join(''):'<p class="mu">Aún no hay exámenes rendidos en este casillero.</p>'}
+  ${at.length?at.map((r,j)=>`<div class="hx-it"><div><div class="hx-i1">${esc(fechaHora(r.f))}${j===0?'<span class="hx-b">ÚLTIMO EXAMEN</span>':''}</div><div class="hx-i2">${esc(titulo)}</div></div><div class="hx-act">${r.n!==null&&r.n!==undefined?`<span class="hx-n" style="--c:var(${col(+r.n)})">${nTxt(r.n)}</span>`:''}${r.u?`<button class="btn pr" data-ver="${j}" style="flex:none;padding:10px 16px">Ver examen</button>`:'<span class="mu" style="font-size:12px">Sin captura</span>'}</div></div>`).join(''):'<p class="mu">Aún no hay exámenes rendidos en este casillero.</p>'}
   ${aj.length?`<div class="hx-t">Ajustes de nota <span class="hx-c">${aj.length}</span></div>`+aj.map(x=>`<div class="hx-aj"><b>${esc(fechaHora(x.fe))}</b> · ${esc(ajTxt(x))}: ${x.a===null||x.a===undefined?'—':nTxt(x.a)} → <b>${nTxt(x.n)}</b><div class="mu" style="margin-top:2px">${esc(x.mo)}</div></div>`).join(''):''}`,
   (q,c,o)=>{
     o.querySelector('.dlg').style.maxWidth='560px';
@@ -796,7 +817,7 @@ const histDlg=(k,i,titulo,sub)=>{
   })};
 document.addEventListener('click',async e=>{const c=e.target.closest&&e.target.closest('[data-cday]');if(!c)return;const f=c.dataset.cday,r=await diaDlg(f);if(!r)return;
 
-  if(r.ac==='xed'||r.ac==='xdel'){const x=(D.examenes||[]).find(z=>z.id===r.x);if(!x)return;if(r.ac==='xed'){const n=await examDlg(x);if(!n)return;Object.assign(x,{titulo:n.titulo,f:n.f,h:n.h,g:n.g})}else{if(!await confirmar('<h3 style="font-size:17px">¿Quitar este examen?</h3><p><b>'+esc(x.titulo)+'</b> · '+dsh(x.f)+'</p>'+(exNotas(x)?'<p><b>Tiene '+exNotas(x)+' nota(s) registradas: también se borrarán.</b></p>':'')))return;delete D.notas[x.id];D.examenes=D.examenes.filter(z=>z.id!==x.id)}save();R();return}
+  if(r.ac==='xed'||r.ac==='xdel'){const x=(D.examenes||[]).find(z=>z.id===r.x);if(!x)return;if(r.ac==='xed'){const n=await examDlg(x);if(!n)return;Object.assign(x,{titulo:n.titulo,f:n.f,h:n.h,g:n.g})}else{if(!await confirmar('<h3 style="font-size:17px">¿Quitar este examen?</h3><p><b>'+esc(x.titulo)+'</b> · '+dsh(x.f)+'</p>'+(exNotas(x)?'<p><b>Tiene '+exNotas(x)+' nota(s) registradas: también se borrarán.</b></p>':'')))return;delete D.notas[x.id];(D.exDel=D.exDel||[]).push(x.id);D.examenes=D.examenes.filter(z=>z.id!==x.id)}save();R();return}
   if(r.ac==='ex'){const x=tem(r.t);if(x){x.fexamen=r.v;save();R()}return}
   const g=grp(r.g),x=tem(r.t);if(!g||!x)return;
   if(r.ac==='ed'){const n=await fechaDlg(g,x);if(n===null)return;setGF(g,x,n);save();R()}
